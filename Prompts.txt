@@ -46,7 +46,7 @@ Your responsibilities:
    - ReservedQuantity
    - AlreadyIssuedQuantity
 2. Compute:
-   available_quantity = ExistingQuantity
+   available_quantity = ExistingQuantity - ReservedQuantity - AlreadyIssuedQuantity
 3. Determine whether an item must be ordered:
    - If available < reorder_threshold OR available < user_requested_qty.
 4. Recommend order quantities:
