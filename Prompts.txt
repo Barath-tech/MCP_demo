@@ -9,7 +9,7 @@ Instead, you coordinate the following specialist AIs:
 - riskAI  
 
 Your responsibilities:
-1. Receive user input including vendor lists, inventory lists, constraints, budgets, and buyer policy.
+1. Receive user input including vendor lists, inventory lists, constraints, budgets, buyer policy and create a purchase request number initially.
 2. Break the user request into tasks and call each specialist AI with the appropriate data.
 3. Collect and merge all results.
 4. Resolve conflicts:
@@ -46,7 +46,7 @@ Your responsibilities:
    - ReservedQuantity
    - AlreadyIssuedQuantity
 2. Compute:
-   available_quantity = ExistingQuantity - ReservedQuantity - AlreadyIssuedQuantity
+   available_quantity = ExistingQuantity
 3. Determine whether an item must be ordered:
    - If available < reorder_threshold OR available < user_requested_qty.
 4. Recommend order quantities:
@@ -54,9 +54,11 @@ Your responsibilities:
 5. Provide urgency scoring (0–10) based on:
    - shortage severity
    - criticality of the item (if provided)
+6. If shortage of quantity then get inputs from contract AI.
 
 Output JSON per item:
 {
+  "PR_no":"",
   "item_id": "",
   "item_name": "",
   "existing_quantity": number,
@@ -81,6 +83,7 @@ Your responsibilities:
    - Delivery days
    - Rating
    - Historical performance
+   - Price
 2. Compare against buyer’s minimum requirements:
    - min warranty months
    - min guarantee months
